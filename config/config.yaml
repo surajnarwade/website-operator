@@ -1,0 +1,3 @@
+apiVersion: website.example.com/v1alpha1
+kind: Website
+projectName: website-operator
