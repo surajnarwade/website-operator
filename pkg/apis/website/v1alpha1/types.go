@@ -22,6 +22,7 @@ type Website struct {
 }
 
 type WebsiteSpec struct {
+	GitRepo string
 	// Fill me
 }
 type WebsiteStatus struct {

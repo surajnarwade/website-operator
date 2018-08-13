@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      initContainers:
+        - name: git-clone
+          image: alpine/git # Any image with git will do
+          args:
+            - clone
+            - --single-branch
+            - --
+            - https://github.com/surajnarwade/surajnarwade.github.io # Your repo
+            - /repo # Put it in the volume
+          volumeMounts:
+            - name:  workdir
+              mountPath:  /repo
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name:  workdir
+            mountPath:  /usr/share/nginx/html
+            readOnly: true
+      volumes:
+        - name:  workdir
+          emptyDir: {}
+      

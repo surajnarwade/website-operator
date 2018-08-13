@@ -2,3 +2,5 @@ apiVersion: "website.example.com/v1alpha1"
 kind: "Website"
 metadata:
   name: "example"
+spec:
+  GitRepo: "https://github.com/surajnarwade/surajnarwade.github.io"
